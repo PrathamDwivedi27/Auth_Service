@@ -10,7 +10,7 @@
         // const user=await User.findByPk(1);
         // const response=bcrypt.compareSync(incomingPassword,user.password);
         // console.log(response);
-        
+
 9) We have made getuser by id in repo. Now we are ready for registration. When the user resister the jwt token will be generated. To generate that we have use jwt package.
 10) In service layer we write bussiness logic that's why we are writing create and verifying token there.
 11) We can see token is running good or not by console in index .js file 
@@ -20,4 +20,5 @@
         // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXRoYW1kNTQ5QGdtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MTY4OTUxMzEsImV4cCI6MTcxNjg5ODczMX0.1O6KXrlZrlZGOSgLu546T25nxj8CKhUHZlj_mIsIym4";
         // const response=userService.verifyToken(token);
         // console.log(response);
-12) 
+12) Now we have to authorise. First we need to verify the password.
+13) 
