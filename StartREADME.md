@@ -21,4 +21,4 @@
         // const response=userService.verifyToken(token);
         // console.log(response);
 12) Now we have to authorise. First we need to verify the password.
-13) 
+13) When you sigin you enter email. so we need a function to get userby email. We make this in repository .
