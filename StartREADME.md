@@ -6,4 +6,6 @@
 6) So we have used bcypt. We also made changes in model to initiate the process.
 7) We have generated salt from serverconfig .
 8) bcrypt internally compares the original password and hashed password you can see code in main index.js 
-9) 
+9) We have made getuser by id in repo. Now we are ready for registration. When the user resister the jwt token will be generated. To generate that we have use jwt package.
+10) In service layer we write bussiness logic that's why we are writing create and verifying token there.
+11) We can see token is running good or not by console in index .js file 
