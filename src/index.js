@@ -4,10 +4,13 @@ const app=express();
 
 const {PORT}=require('./config/server-config');
 const apiRoutes=require('./routes/index');
+const db=require('./models/index');
+
 
 // const {User}=require('./models/index');
 // const bcrypt=require('bcrypt');
 // const UserService=require('./services/user-service');
+// const {User,Role}=require('./models/index');
 
 const prepareAndStartServer=()=>{
 
@@ -18,9 +21,11 @@ const prepareAndStartServer=()=>{
 
     app.listen(PORT,async ()=>{
         console.log(`Server is running on port ${PORT}`);
+        if(process.env.DB_SYNC){
+            db.sequelize.sync({alter:true});
+        }
         
 
-        
     })
 }
 

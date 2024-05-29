@@ -12,37 +12,40 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
-  }
-  User.init({
-    email: {
-      type:DataTypes.STRING,
-      allowNull:false,
-      unique:true,
-      validate: {
-        isEmail: true
+        static associate(models) {
+          // define association here
+          this.belongsToMany(models.Role,{
+            through:'User_Roles',
+          }) 
+        }
       }
-    },
-    password: {
-      type:DataTypes.STRING,
-      allowNull:false,
-      validate:{
-        len:[4,20]
-      },
-    }
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+      User.init({
+        email: {
+          type:DataTypes.STRING,
+          allowNull:false,
+          unique:true,
+          validate: {
+            isEmail: true
+          }
+        },
+        password: {
+          type:DataTypes.STRING,
+          allowNull:false,
+          validate:{
+            len:[4,20]
+          },
+        }
+      }, {
+        sequelize,
+        modelName: 'User',
+      });
 
-  User.beforeCreate((user)=>{
-    const encryptedPassword=bcrypt.hashSync(user.password,SALT);
-    user.password=encryptedPassword;
-  });
+      User.beforeCreate((user)=>{
+        const encryptedPassword=bcrypt.hashSync(user.password,SALT);
+        user.password=encryptedPassword;
+      });
 
 
 
-  return User;
-};
+      return User;
+    };
