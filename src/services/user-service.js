@@ -3,6 +3,7 @@ const {JWT_KEY}=require('../config/server-config');
 const bcrypt=require('bcrypt');
 
 const UserRepository=require('../repository/user-repository');
+const AppErrors = require('../utils/error-handler');
 
 class UserService{
     constructor(){
@@ -14,8 +15,16 @@ class UserService{
             const user=this.userRepository.create(data);
             return user;
         } catch (error) {
+            if(error.name=='SequelizeValidationError'){
+                throw error;                    //catch the error in controller
+            }
             console.log("Something wrong at service level");
-            throw error;
+            throw new AppErrors(
+                'Server Error',
+                'Something went wrong in service',
+                'Logical error found',
+                500
+            )
         }
     }
 
@@ -99,6 +108,14 @@ class UserService{
         }
     }
     
+    isAdmin(userId){
+        try {
+            return this.userRepository.isAdmin(userId);
+        } catch (error) {
+            console.log("Something went wrong in admin verification",error);
+            throw error;
+        }
+    }
 }
 
 module.exports=UserService;

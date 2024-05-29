@@ -29,4 +29,12 @@
 18) That's why we are makin role model.
 19) To establish a many to many relationships we need to establish a new table to connect both.
 20) To sync user roles you have sync once
-21) 
+21) We have added function to check for admin and a middleware too
+22) You can data in user_roles like this 
+        const u1=await User.findByPk(4);
+        const r1=await Role.findByPk(3);
+
+        u1.addRole(r1);
+
+23) To handle the error gracefully we have made APPerror using package http server-errors. The syntax is not to be find. Understand this logic and you can make yourself very easily.
+24) Writing the error in repository layer.

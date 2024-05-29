@@ -1,9 +1,11 @@
 const UserService=require('../services/user-service');
+const {StatusCodes}=require('http-status-codes');
 
 const userService=new UserService();
 
 const create=async (req,res)=>{
     try {
+        console.log(req.body.email)
         const user=await userService.create({
             email:req.body.email,
             password:req.body.password 
@@ -15,11 +17,11 @@ const create=async (req,res)=>{
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
-            message:"Something wrong at controller level",
+        return res.status(error.statusCode).json({
+            message:error.message,
             data:{},
             success:false,
-            err:error
+            err:error.explanation
         })
     }
 }
@@ -64,8 +66,28 @@ const isAuthenticated=async (req,res)=>{
     }
 }
 
+const isAdmin=async (req,res)=>{
+    try {
+        const response=await userService.isAdmin(req.body.id);
+        return res.status(200).json({
+            message:"Successfully fetched whether user is admin or not",
+            data:response,
+            success:true
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message:"Something went wrong in admin verification in controller",
+            data:{},
+            success:false,
+            err:error
+        })
+    }
+}
+
 module.exports={
     create,
     signIn,
-    isAuthenticated
+    isAuthenticated,
+    isAdmin
 }

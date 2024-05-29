@@ -1,12 +1,19 @@
 const {User}=require('../models/index');
+const {Role}=require('../models/index');
+const ValidationError=require('../utils/validation-error');
 
 class UserRepository{
 
     async create(data){
         try {
+            // console.log("repo",data);
             const user=await User.create(data);
             return user;
         } catch (error) {
+            if(error.name=='SequelizeValidationError'){
+                // console.log("error in repo",error.name);
+                throw new ValidationError(error);           //pass the error to service layer
+            }
             console.log("Something wrong at repository level");
             throw error;
         }
@@ -48,6 +55,22 @@ class UserRepository{
             return user;
         } catch (error) {
             console.log("Something went wrong in getting user by email",error);
+            throw error;
+        }
+    }
+
+    async isAdmin(userId){
+        try {
+            const user=await User.findByPk(userId);
+            const adminRole=await Role.findOne({
+                where:{
+                    name:'ADMIN'
+                }
+            })
+            // console.log(adminRole,user);
+            return user.hasRole(adminRole);
+        } catch (error) {
+            console.log("Something wrong at admin verification");
             throw error;
         }
     }

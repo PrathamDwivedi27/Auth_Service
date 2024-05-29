@@ -10,7 +10,7 @@ const db=require('./models/index');
 // const {User}=require('./models/index');
 // const bcrypt=require('bcrypt');
 // const UserService=require('./services/user-service');
-// const {User,Role}=require('./models/index');
+const {User,Role}=require('./models/index');
 
 const prepareAndStartServer=()=>{
 
