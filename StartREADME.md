@@ -23,4 +23,10 @@
 12) Now we have to authorise. First we need to verify the password.
 13) When you sigin you enter email. so we need a function to get userby email. We make this in repository .
 14) Now we are going to write some middlewares for validation.
-15) 
+15) Now we want to check whether user is authenticated or not.
+16) We will write bussiness logic in service layer.
+17) Now we want to assign roles . For eg a seller can buy product also and sell also in amazon but a customer can only buy. So we have to assign roles
+18) That's why we are makin role model.
+19) To establish a many to many relationships we need to establish a new table to connect both.
+20) To sync user roles you have sync once
+21) 
