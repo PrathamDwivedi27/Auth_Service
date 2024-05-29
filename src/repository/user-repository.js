@@ -1,6 +1,8 @@
 const {User}=require('../models/index');
 const {Role}=require('../models/index');
+const ClientError = require('../utils/client-error');
 const ValidationError=require('../utils/validation-error');
+const {StatusCodes} = require('http-status-codes');
 
 class UserRepository{
 
@@ -52,6 +54,14 @@ class UserRepository{
                     email:userEmail
                 }
             })
+            if(!user){              //agar user nhi milta hai to null return karta hai
+                throw new ClientError(
+                    'Attribute_not_found',
+                    'Invalid email provided',
+                    'Email not found in the database',
+                    StatusCodes.NOT_FOUND
+                )
+            }
             return user;
         } catch (error) {
             console.log("Something went wrong in getting user by email",error);

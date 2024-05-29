@@ -38,3 +38,6 @@
 
 23) To handle the error gracefully we have made APPerror using package http server-errors. The syntax is not to be find. Understand this logic and you can make yourself very easily.
 24) Writing the error in repository layer.
+25) We have made two types of error specific errors like validation error and generic error like in get email.
+
+26) 
